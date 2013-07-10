@@ -1,0 +1,44 @@
+.row{"ng-app"=>"AngulaRails", "ng-controller"=>"TacoTacoController"}
+  .span6
+    %h3 Add Taco
+
+    %form{"ng-submit"=>"addTaco()"}
+      .control-group
+        %label Name
+        .controls
+          %input{type: :text, placeholder: "Name your creation", "ng-model"=>"taco.name"}
+      .control-group
+        %label Type of taco
+        .controls
+          %select{"ng-model"=>"taco.filling", "ng-options"=>"filling for filling in fillings"}
+            %option{value: ""} Pick a Filling
+      .control-group
+        %label Extras
+        .controls
+          %label{"ng-repeat"=>"extra in extras", class: "checkbox inline"}
+            %input{type: :checkbox, "ng-model"=>"extra.checked"}
+            {{ extra.name }}
+      .control-group
+        %label Cheese
+        .controls
+          %label.radio{"ng-repeat" => "choice in cheeses"}
+            %input{name: "cheese", type: :radio, value: "{{ choice }}", "ng-model" => "taco.cheese"}
+              {{ choice }}
+
+      %button.btn.btn-primary
+        Add Taco to Order
+        
+  .span6
+    %h3 Your Order
+
+    %table.table
+      %tbody{"ng-repeat"=>"taco in tacos"}
+        %tr
+          %td {{ taco.name }}
+          %td {{ taco.filling }}
+          %td
+            %span{"ng-show" => "taco.sourCream"} Sour Cream
+            %span{"ng-show" => "taco.guac"} Guac
+          %td{"ng-repeat"=>"extra in taco.extras"}
+            {{extra}}
+          %td {{ taco.cheese }}

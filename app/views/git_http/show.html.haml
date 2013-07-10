@@ -1,0 +1,15 @@
+.row{"ng-app" => "AngulaRails", "ng-controller" => "GitHttpController"}
+  .span12
+    %form{"ng-submit" => "search()"}
+      .input-prepend
+        %span.add-on
+          %i.icon-search
+        %input{type: "text", placeholder: "Git Username", "ng-model" => "username"}
+
+
+    %h5.text-error {{ errorMessage }}
+    %i.icon-refresh.icon-spin{"ng-show" => "searching"}
+    %ul{"ng-repeat" => "repo in repos"}
+      %li
+        %h3 {{ repo.full_name }}
+        %h5.muted {{ repo.url }}
