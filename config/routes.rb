@@ -1,4 +1,6 @@
 AngularTraining::Application.routes.draw do
+  get "secure/show"
+  devise_for :users, :controllers => { :sessions => "sessions" }
   resources :books
 
   get "taco_taco/show"

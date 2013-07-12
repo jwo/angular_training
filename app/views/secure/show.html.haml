@@ -1,0 +1,29 @@
+.row{"ng-app"=>"AngulaRails", "ng-controller"=>"SessionsController"}
+  .span12
+    %h1 My Super Secure Stuff
+
+    .secure{"ng-show"=>"authorized()"}
+      .pull-right
+        %button{"ng-click"=>"signOut()", class: "btn"} Sign Out
+      %dl
+        %dt My Luggage (and planetary shield's Password
+        %dd 1-2-3-4-5
+      .login{"ng-show"=>"!authorized()"}
+        .alert.warning
+          Please Login to access my secrets
+      %form{"ng-submit"=>"signIn()"}
+        #errors.alert.alert-error{"ng-show"=>"authErrors"}
+          {{ authErrors }}
+        .control-group
+          =label_tag :email
+          .controls
+            =email_field_tag :email, '', autofocus: true, "ng-model"=>"email"
+        .control-group
+          =label_tag :password
+          .controls
+            =password_field_tag :password, '', "ng-model"=>"password"
+        =submit_tag "Sign In", class: "btn btn-large btn-primary"
+.row
+  .span6.offset3
+    .well
+      %h3 Logged in? #{user_signed_in?}
